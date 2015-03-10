@@ -1,0 +1,8 @@
+<div class="row" data-ng-controller="simpleController">
+	<div class="col-lg-2 col-centered">
+		<input type="text" data-ng-model="studentGrade" />
+		<br>
+		<div data-ng-repeat="student in students | filter:studentGrade | orderBy:'grade'">{{student.name}} - {{student.grade}}</div>
+	<a href="#/">View 1</a>
+	</div>
+</div>

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gradebook</title>
+    <link href="styles/bootstrap.min.css" rel="stylesheet">
+    <link href="styles/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/main.css" rel="stylesheet">
+    <script src="plugins/jquery-1.11.1.min.js"></script>
+  	<script src="plugins/jquery-ui.min.js"></script>
+  	<script src="plugins/angular.min.js"></script>
+	<script src="plugins/jquery.sticky.js"></script>
+	<script src="plugins/pinterest_grid.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+
+	<div class="info topbox"><i class="fa fa-question topbutton infobtn"></i></div>
+
+	<div class="deletegrade topbox"><i class="fa fa-trash-o topbutton deletegradebtn"></i></div>
+
+	<div class="center">
+		<div class="page-header">
+		  <h1>Welcome to Gradebook!<br/><small>Add your grades below and watch magic happen.</small></h1>
+		</div>
+	</div>
+
+
+	<div class="center">
+		<h3>Your overall grade is</h3><div class="overallgrade"></div>
+		<h3>I wish for a</h3>
+		<div class="input-group center">
+        <input class="btn btn-default overallbtn-big" type="text" placeholder="10"></input>
+		</div>
+	</div>
+
+	<div class="list center row">
+
+		<div class="subjectcontainer subjectbox lastadded" data-subject-id="0">
+
+			<div class="input-group gradetitlebar">
+				<span class="input-group-btn">
+			    	<button class="btn btn-default overallbtn btn-info aov" type="button">10</button>
+			    </span>
+				<input type="text" class="form-control subject" aria-label="..." placeholder="Course">
+			    <span class="input-group-btn">
+			    	<input class="btn btn-default overallbtn btn-success wov" type="text" placeholder=""></input>
+			    </span>
+			</div>
+
+			<div class="gradecontainer">
+				<div class="btn-group-vertical gradecontent draggr grcontainer" role="group" aria-label="..." data-gr-id="0">
+					<button type="button" class="btn btn-default btn-sm gradeup">
+				  		<span class="glyphicon glyphicon-chevron-up"></span>
+				  	</button>
+				  	<input type="text" class="btn btn-default gradebtn gr"/>
+				  	<button type="button" class="btn btn-default btn-sm gradedown">
+				  		<span class="glyphicon glyphicon-chevron-down"></span>
+				  	</button>
+				</div>
+
+				<div class="btn-group-vertical gradecontent draggr grcontainer" role="group" aria-label="..." data-gr-id="1">
+					<button type="button" class="btn btn-default btn-sm gradeup">
+				  		<span class="glyphicon glyphicon-chevron-up"></span>
+				  	</button>
+				  	<input type="text" class="btn btn-default gradebtn gr"/>
+				  	<button type="button" class="btn btn-default btn-sm gradedown">
+				  		<span class="glyphicon glyphicon-chevron-down"></span>
+				  	</button>
+				</div>
+
+				<div class="btn-group-vertical gradecontent" role="group" aria-label="...">
+				  	<button type="button" class="btn btn-default btn-sm addgr">
+				  		<span class="glyphicon glyphicon-plus"></span>
+				 	 </button>
+				  	<button type="button" class="btn btn-default btn-sm btn-warning addfgr" data-final-exists="0">
+				  		<span class="glyphicon glyphicon-plus"></span>
+				 	 </button>
+				</div>
+
+			</div>
+			<div class="subjectmenubox">
+				<div class="delsubjectbox">
+					<i class="fa fa-trash" style="line-height:30px"></i>
+				</div>
+			</div>
+			<div class="subjectmenutrigger">
+				<i class="fa fa-angle-down"style="font-size:50px;line-height:30px;"></i>
+			</div>
+		</div>
+
+		<div class="subjectcontainer addingbox">
+			<div class="gradecontainer addingcontainer">
+				<button type="button" class="btn btn-default btn-lg addbox">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
+			</div>
+		</div>
+
+	</div>
+	<h1 class="version"><small>v0.0.3 pre-ng</small></h1>
+
+<script>
+//          TODOS
+// -Clean all this spaghetti code	| v0.0.3a
+// -Add Wanted Grade System			| v0.0.4
+// -Build Toolbar/Header			| v0.0.5
+// -Make Website Responsive			| v0.0.6
+// -Add Some Layout Elements		| v0.0.7
+//  * BIG ANGULAR UPDATE *			| v0.1.0
+
+// *** Initializing variables ***
+var mainOverallGrade=10;
+var deleteModeOn=0;
+var gradeSelector;
+var subjectSelector;
+var x=0;
+var subjects = [
+	{
+		name:"",
+		overallgrade:10,
+		wantedgrade:0,
+		grades:[10,10],
+		wantedgrades:[],
+		fgrade:0,
+		wantedmode:0
+	}
+];
+
+/*
+// *** Counting Elements for DOM ***
+var Sarray = $(".list .subjectcontainer").map(function(){
+  return $(this).attr("data-subject-id");
+}).get();
+var Garray = $(".list").find("[data-subject-id='" + 0 + "']").children(".gradecontainer").children(".grcontainer").map(function(){
+  return $(this).attr("data-gr-id");
+}).get();
+*/
+
+// *** Adding placeholders to the first subject box ***
+$( ".lastadded" ).find( ".gr" ).val( "10" );
+$( ".lastadded" ).find( ".wov" ).val( "-" );
+$( ".lastadded" ).removeClass( "lastadded" );
+ovrefresh();
+
+// *** Creating the premade DOM Elements ***
+var grade = '<div class="btn-group-vertical gradecontent draggr grcontainer glastadded" role="group" aria-label="..."  data-gr-id="" style="margin-right: 0.3em;"><button type="button" class="btn btn-default btn-sm gradeup"><span class="glyphicon glyphicon-chevron-up"></span></button><input type="text" class="btn btn-default gradebtn gr"/><button type="button" class="btn btn-default btn-sm gradedown"><span class="glyphicon glyphicon-chevron-down"></span></button></div>'
+var neededgrade = '<div class="btn-group-vertical gradecontent draggr wgrcontainer" role="group" aria-label="..." data-wgr-id="" style="margin-right: 0.3em;"><button type="button" class="btn btn-default btn-sm btn-success neededgrade gradeup"><span class="glyphicon glyphicon-chevron-up"></span></button><input type="text" class="btn btn-default gradebtn btn-success neededgrade wgr gr"/><button type="button" class="btn btn-default btn-sm btn-success neededgrade gradedown"><span class="glyphicon glyphicon-chevron-down"></span></button></div>'
+var fgrade = '<div class="btn-group-vertical gradecontent draggr fgrcontainer glastadded" role="group" aria-label="..."data-gr-id="" style="margin-right: 0.3em;"><button type="button" class="btn btn-default btn-sm btn-warning fgrade gradeup"><span class="glyphicon glyphicon-chevron-up"></span></button><input type="text" class="btn btn-default gradebtn btn-warning fgrade fgr gr"/><button type="button" class="btn btn-default btn-sm btn-warning fgrade gradedown"><span class="glyphicon glyphicon-chevron-down"></span></button></div>'
+var subject = '<div class="subjectcontainer subjectbox lastadded" data-subject-id=""><div class="input-group gradetitlebar"><span class="input-group-btn"><button class="btn btn-default overallbtn btn-info aov" type="button">10</button></span><input type="text" class="form-control subject" aria-label="..." placeholder="Course"><span class="input-group-btn"><input class="btn btn-default overallbtn btn-success wov" type="text" placeholder=""></input></span></div><div class="gradecontainer"><div class="btn-group-vertical gradecontent draggr grcontainer" role="group" aria-label="..." data-gr-id="0" style="margin-right: 0.3em;"><button type="button" class="btn btn-default btn-sm gradeup"><span class="glyphicon glyphicon-chevron-up"></span></button><input type="text" class="btn btn-default gradebtn gr"/><button type="button" class="btn btn-default btn-sm gradedown"><span class="glyphicon glyphicon-chevron-down"></span></button></div><div class="btn-group-vertical gradecontent draggr grcontainer" role="group" aria-label="..." data-gr-id="1" style="margin-right: 0.3em;"><button type="button" class="btn btn-default btn-sm gradeup"><span class="glyphicon glyphicon-chevron-up"></span></button><input type="text" class="btn btn-default gradebtn gr"/><button type="button" class="btn btn-default btn-sm gradedown"><span class="glyphicon glyphicon-chevron-down"></span></button></div><div class="btn-group-vertical gradecontent" role="group" aria-label="..."><button type="button" class="btn btn-default btn-sm addgr"><span class="glyphicon glyphicon-plus"></span></button><button type="button" class="btn btn-default btn-sm btn-warning addfgr" data-final-exists="0"><span class="glyphicon glyphicon-plus"></span></button></div></div><div class="subjectmenubox"><div class="delsubjectbox"><i class="fa fa-trash" style="line-height:30px"></i></div></div><div class="subjectmenutrigger"><i class="fa fa-angle-down"style="font-size:50px;line-height:30px;"></i></div></div>'
+
+// *** Function to create a new Subject Box ***
+$(document).on('click', '.addbox', function() {
+	$( this ).parent().parent().before( subject );
+	$( ".lastadded" ).find( ".gr" ).val( "10" );
+	$( ".lastadded" ).find( ".wov" ).val( "-" );
+	subjects.push({
+		name:"",
+		overallgrade:10,
+		wantedgrade:0,
+		grades:[10,10],
+		wantedgrades:[],
+		fgrade:0,
+		wantedmode:0
+	});
+	$( ".lastadded" ).attr({"data-subject-id":subjects.length-1});
+	$( ".lastadded" ).removeClass( "lastadded" );
+	ovrefresh();
+});
+
+// *** Function to create grades for specific box ***
+$(document).on('click', '.addgr', function() {
+	$( this ).parent().before( grade );
+	subjectSelector=parseInt($( ".glastadded" ).parent().parent().attr("data-subject-id"));
+	subjects[subjectSelector].grades.push(5);
+	$( ".glastadded" ).attr({"data-gr-id":subjects[subjectSelector].grades.length-1})
+	$( ".glastadded" ).find( ".gr" ).val( subjects[subjectSelector].grades[subjects[subjectSelector].grades.length-1] );
+	$( ".glastadded" ).removeClass( "glastadded" );
+	refresh(subjectSelector);
+});
+
+// *** Function to create the final grade for the specific box ***
+$(document).on('click', '.addfgr', function() {
+	$( this ).parent().before( fgrade );
+	subjectSelector=parseInt($( ".glastadded" ).parent().parent().attr("data-subject-id"));
+	subjects[subjectSelector].fgrade=5;
+	$( ".glastadded" ).find( ".fgr" ).val( subjects[subjectSelector].fgrade );
+	$( this ).attr({"data-final-exists":1});
+	$( ".glastadded" ).removeClass( "glastadded" );
+	$( this ).addClass( "disabled" );
+	refresh(subjectSelector);
+});
+
+// *** Change grade buttons functions ***
+var tempGrade=0;
+var tempSelector;
+
+$(document).on('click', '.gradeup', function() {
+	tempSelector = $( this ).parent();
+	if(tempSelector.hasClass("fgrcontainer")){
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = subjects[subjectSelector].fgrade;
+		if(tempGrade<10){
+			tempSelector.children( ".gr" ).val( tempGrade+1 );
+			subjects[subjectSelector].fgrade=subjects[subjectSelector].fgrade+1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].fgrade=1;
+		}
+	}
+	else if(tempSelector.hasClass("wgrcontainer")){
+		gradeSelector = parseInt(tempSelector.attr("data-wgr-id"));
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = subjects[subjectSelector].wantedgrades[gradeSelector];
+		if(tempGrade<10){
+			tempSelector.children( ".gr" ).val( tempGrade+1 );
+			subjects[subjectSelector].wantedgrades[gradeSelector]=subjects[subjectSelector].wantedgrades[gradeSelector]+1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].wantedgrades[gradeSelector]=1;
+		}
+	}
+	else{
+		gradeSelector = parseInt(tempSelector.attr("data-gr-id"));
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = subjects[subjectSelector].grades[gradeSelector];
+		if(tempGrade<10){
+			tempSelector.children( ".gr" ).val( tempGrade+1 );
+			subjects[subjectSelector].grades[gradeSelector]=subjects[subjectSelector].grades[gradeSelector]+1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].grades[gradeSelector]=1;
+		}
+	}
+	tempGrade=0;
+	refresh(subjectSelector);
+});
+
+$(document).on('click', '.gradedown', function() {
+	tempSelector = $( this ).parent();
+	if(tempSelector.hasClass("fgrcontainer")){
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = subjects[subjectSelector].fgrade;
+		if(tempGrade>1){
+			tempSelector.children( ".gr" ).val( tempGrade-1 );
+			subjects[subjectSelector].fgrade=subjects[subjectSelector].fgrade-1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].fgrade=1;
+		}
+	}
+	else if(tempSelector.hasClass("wgrcontainer")){
+		gradeSelector = parseInt(tempSelector.attr("data-wgr-id"));
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = subjects[subjectSelector].wantedgrades[gradeSelector];
+		if(tempGrade>1){
+			tempSelector.children( ".gr" ).val( tempGrade-1 );
+			subjects[subjectSelector].wantedgrades[gradeSelector]=subjects[subjectSelector].wantedgrades[gradeSelector]-1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].wantedgrades[gradeSelector]=1;
+		}
+	}
+	else{
+		gradeSelector = parseInt(tempSelector.attr("data-gr-id"));
+		subjectSelector = parseInt(tempSelector.parent().parent().attr("data-subject-id"));
+		tempGrade = parseInt(subjects[subjectSelector].grades[gradeSelector]);
+		if(tempGrade>1){
+			tempSelector.children( ".gr" ).val( tempGrade-1 );
+			subjects[subjectSelector].grades[gradeSelector]=subjects[subjectSelector].grades[gradeSelector]-1;
+		}
+		if(tempGrade>10||tempGrade<1){
+			tempSelector.children( ".gr" ).val( 1 );
+			subjects[subjectSelector].grades[gradeSelector]=1;
+		}
+	}
+	tempGrade=0;
+	refresh(subjectSelector);
+});
+
+// *** Turn on Delete Mode ***
+$(document).on('click', '.deletegradebtn', function(){
+	$( ".gradecontainer .draggr" ).draggable({ revert: "invalid", cancel:false, cursorAt: { top: 45, left: 17 }, stack: ".gradecontainer .draggr" });
+	$( ".gradecontainer .draggr" ).draggable("disable");
+	switch (deleteModeOn) {
+	    case 0:
+			$( ".gradecontainer .draggr" ).draggable("enable");
+			$( ".addgr" ).addClass( "disabled" );
+			$( ".addfgr" ).addClass( "disabled" );
+			$( ".wov" ).addClass( "disabled" );
+			$( ".addbox" ).addClass( "disabled" );
+			$( this ).addClass("deletemodeon");
+			deleteModeOn=1;
+	        break;
+	    case 1:
+			$( ".gradecontainer .draggr" ).draggable("disable");
+			$( ".addgr" ).removeClass( "disabled" );
+			$(".list").find("[data-final-exists='" + 0 + "']").removeClass( "disabled" );
+			$( ".wov" ).removeClass( "disabled" );
+			$( ".addbox" ).removeClass( "disabled" );
+			$( this ).removeClass("deletemodeon");
+			deleteModeOn=0;
+	        break;
+	}
+});
+
+// *** Deleting Grades ***
+$( ".deletegradebtn" ).droppable({
+      activeClass: "deleteselected",
+      hoverClass: "deletedropped",
+      drop: function( event, ui ) {
+		var k=0;
+	    subjectSelector = parseInt(ui.draggable.parent().parent().attr("data-subject-id"));
+      	if(ui.draggable.hasClass("fgrcontainer")){
+      		ui.draggable.parent().find(".addfgr").attr({"data-final-exists":0});
+	    	subjects[subjectSelector].fgrade=0;
+    	}
+    	else if(ui.draggable.hasClass("wgrcontainer")){
+	    	removeArrayElementById(subjects[subjectSelector].wantedgrades,ui.draggable.attr("data-wgr-id"));
+    	}
+    	else{
+	    	removeArrayElementById(subjects[subjectSelector].grades,ui.draggable.attr("data-gr-id"));
+	    	for(k=parseInt(ui.draggable.attr("data-gr-id"))+1;k<=parseInt(subjects[subjectSelector].grades.length);k++){
+	    		ui.draggable.parent().find("[data-gr-id='" + k + "']").attr({"data-gr-id":k-1});
+	    	}
+
+    	}
+       	ui.draggable.remove();
+		refresh(subjectSelector);
+      }
+    });
+
+// *** Deleting Subjects ***
+$(document).on('click', '.delsubjectbox', function() {
+	if (confirm("Are you sure you want to delete this box?")) {
+		var k=0;
+		subjectSelector=parseInt($( this ).parent().parent().attr("data-subject-id"));
+		removeArrayElementById(subjects,subjectSelector);
+		for(k=parseInt(subjectSelector)+1;k<=parseInt(subjects.length);k++){
+	    	$( ".list" ).find("[data-subject-id='" + k + "']").attr({"data-subject-id":k-1});
+	    }
+    	$( this ).parent().parent().remove();
+    	ovrefresh();
+    }
+});
+
+// *** Array Element Removal Functions ***
+function removeArrayElementByValue(array, x){
+	y = array.indexOf(x);
+	if (y > -1) {
+    	array.splice(y, 1);
+	}
+	return array;
+}
+
+function removeArrayElementById(array, y){
+	if (y > -1) {
+    	array.splice(y, 1);
+	}
+	return array;
+}
+// ****************************************
+
+// *** Menu open/close trigger button ***
+$(document).on('click', '.subjectmenutrigger', function() {
+	if($( this ).children(".fa").hasClass("fa-angle-down")){
+		$( this ).parent().children(".subjectmenubox").slideDown();
+		$( this ).children(".fa").removeClass("fa-angle-down");
+		$( this ).children(".fa").addClass("fa-angle-up");		
+	}
+	else if($( this ).children(".fa").hasClass("fa-angle-up")){
+		$( this ).parent().children(".subjectmenubox").slideUp();
+		$( this ).children(".fa").removeClass("fa-angle-up");
+		$( this ).children(".fa").addClass("fa-angle-down");		
+	}
+});
+
+// *** Number Rounder ***
+function round(x){
+	if(x>=parseInt(x)+0.5){
+		return parseInt(x+1);
+	}
+	else{
+		return parseInt(x);
+	}
+}
+
+// *** Refresh the overall grade ***
+function ovrefresh(){
+	var sum=0;
+	var ov=0;
+	var num=subjects.length;
+	for (var i = 0; i < num; i++) {
+		if(subjects[i].overallgrade==0){num--;}
+		sum = sum + round(subjects[i].overallgrade);
+	};
+	ov=sum/num;
+	mainOverallGrade=Math.floor(ov * 100) / 100;
+	$(".overallgrade").html(mainOverallGrade);
+}
+
+// *** Refresh a subject overall ***
+function refresh(x){
+	var sum=0;
+	var aov=0;
+	var num=subjects[x].grades.length;
+	if(num){
+		for (var i = 0; i < num; i++) {
+			sum = sum + subjects[x].grades[i];
+		};
+		aov = sum / num;
+		if(subjects[x].fgrade){
+			aov=((aov*3)+subjects[x].fgrade)/4;	
+		}
+		subjects[x].overallgrade=aov;
+		if(parseInt(aov)!=aov){
+			aov=round(aov);
+		}
+		$(".list").find("[data-subject-id='" + x + "']").find(".aov").html(aov);
+	}
+	else{
+		subjects[x].overallgrade=0;
+		$(".list").find("[data-subject-id='" + x + "']").find(".aov").html("-");
+	}
+	ovrefresh();
+}
+
+// *** Input Change Verifier ***
+$('.gr').each(function() {
+	var elem = $( this );
+
+   	// Save current value of element
+   	elem.data('oldVal', elem.val());
+
+   	// Look for changes in the value
+   	elem.bind("propertychange change click keyup input paste", function(event){
+    // If value has changed...
+    if (elem.data('oldVal') != elem.val()) {
+       	// Updated stored value
+       	elem.data('oldVal', elem.val());
+
+       	subjectSelector=parseInt(elem.parent().parent().parent().attr("data-subject-id"));
+       	gradeSelector=parseInt(elem.parent().attr("data-gr-id"));
+
+       	if(parseInt(elem.val())<=10&&parseInt(elem.val())>=1){
+       		subjects[subjectSelector].grades[gradeSelector]=parseInt(elem.val());
+       		refresh(subjectSelector);
+   		}
+
+    }
+
+   });
+ });
+
+// *** DOM Handling ***
+$(document).ready(function(){
+    $(".infobtn").sticky({className:"stickiedinfo"});
+    $(".deletegradebtn").sticky({topSpacing:10});
+    $('.row').pinterest_grid({
+		no_columns: 4,
+		padding_x: 24,
+		padding_y: 10,
+		single_column_breakpoint: 700,
+		});
+
+});
+				
+</script>
+
+  </body>
+</html>
