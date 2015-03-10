@@ -14,17 +14,17 @@
 
 ####You can calculate your GPA instantly
 
-Watch how every little change affects your GPA.
+Watch how every little change affects your GPA.<br/>
 All elements get refreshed at any action that you do, so you'll have all of your grades and averages at the click of a mouse.
 
 ####Easier Management
 
-With this web-app you can say bye-bye to your calculator.
+With this web-app you can say bye-bye to your calculator.<br/>
 It will save you the trouble of trying to count and trying to manage all of those grades with a simple interface solution.
 
 ####Try possibilities
 
-Ever wanted to see how your averages would look if you got a certain grade?
+Ever wanted to see how your averages would look if you got a certain grade?<br/>
 Well, now you can try everything you set your mind to. Find out what grades you need to pass or to get a perfect average in a fast and simple way.
 
 ###So, why not use this app?
@@ -35,29 +35,29 @@ Well, now you can try everything you set your mind to. Find out what grades you 
 ###To-Do List and Upcoming Updates:
 
 ####v0.0.3a pre-ng
--Clean the code from the main index.html file.
--Add comments and a list of what everything does.
+-Clean the code from the main index.html file.<br/>
+-Add comments and a list of what everything does.<br/>
 -Add a list of dependencies and clean up everything.
 
 ####v0.0.4 pre-ng
--Add wanted grades, averages and overall averages.
+-Add wanted grades, averages and overall averages.<br/>
 -Add basic options to course boxes.
 
 ####v0.0.5 pre-ng
--Build a Toolbar/Header
--Add more buttons and functionalities.
+-Build a Toolbar/Header<br/>
+-Add more buttons and functionalities.<br/>
 -Add advanced options to course boxes.
 
 ####v0.0.6 pre-ng
--Make web-app responsive.
+-Make web-app responsive.<br/>
 -Add save and load system.
 
 ####v0.0.7 pre-ng
--Clean up interface.
+-Clean up interface.<br/>
 -Make a better layout by adding some plugins.
 
 ###v0.1.0 Beta / The Big Angular Update.
--Port the application completely in angularjs.
+-Port the application completely in angularjs.<br/>
 -Implement node, express, grunt and others.
 
 ####v0.1.1 Beta
@@ -66,6 +66,6 @@ Well, now you can try everything you set your mind to. Find out what grades you 
 ---
 
 ###Other Info:
->Written in Javascript with help from Bootstrap and Jquery.
->Will be released to the public when it's stable. Probably when it hits v0.1 beta.
+>Written in Javascript with help from Bootstrap and Jquery.<br/>
+>Will be released to the public when it's stable. Probably when it hits v0.1 beta.<br/>
 >For more information or anything else, contact me at xclubcontest@gmail.com
