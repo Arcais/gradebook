@@ -50,6 +50,7 @@ $( ".deletegradebtn" ).droppable({
       }
     });
 
+
 // *** Deleting Subjects ***
 $(document).on('click', '.delsubjectbox', function() {
 	if (confirm("Are you sure you want to delete this box?")) {
@@ -57,9 +58,29 @@ $(document).on('click', '.delsubjectbox', function() {
 		subjectSelector=parseInt($( this ).parent().parent().attr("data-subject-id"));
 		removeArrayElementById(subjects,subjectSelector);
 		for(k=parseInt(subjectSelector)+1;k<=parseInt(subjects.length);k++){
-	    	$( ".list" ).find("[data-subject-id='" + k + "']").attr({"data-subject-id":k-1});
+			var element = $( ".list" ).find("[data-subject-id='" + k + "']");
+	    	element.attr({"data-subject-id":k-1});
 	    }
     	$( this ).parent().parent().remove();
+    	//$( ".list" ).find(".column"+((subject.length%4)+2)).append( $(".addingbox").clone() );
     	ovrefresh();
+    	refreshSubjectPosition();
     }
 });
+
+function refreshSubjectPosition(){
+	for(k=0;k<=(subjects.length-1);k++){
+		if((k+1)%4){
+			$(".list").children(".column"+(k+1)%4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));		
+		}
+		else{
+			$(".list").children(".column"+4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));				
+		}
+	}
+	if((subjects.length+1)%4){
+		$(".list").children(".column"+(subjects.length+1)%4).append($(".addingbox"));
+	}
+	else{
+		$(".list").children(".column"+4).append($(".addingbox"));		
+	}
+}

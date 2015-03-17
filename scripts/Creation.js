@@ -12,8 +12,14 @@ $(document).on('click', '.addbox', function() {
 		fgrade:0,
 		wantedmode:0
 	});
+	var columnSelector = parseInt((subjects.length%4)+1);
+	if(columnSelector==0){
+		columnSelector=4;
+	}
 	$( ".lastadded" ).attr({"data-subject-id":subjects.length-1});
 	$( ".lastadded" ).removeClass( "lastadded" );
+	$( this ).parent().parent().parent().parent().find(".column"+columnSelector).append( $( this ).parent().parent().clone() );
+	$( this ).parent().parent().remove();
 	ovrefresh();
 });
 

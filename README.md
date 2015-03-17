@@ -4,7 +4,7 @@
 
 ---
 
-#####Current Version: v0.0.3 pre-ng
+#####Current Version: v0.0.3b pre-ng
 #####Avaliable only in Romanian Grading System currently. Big updates coming soon!
 
 ---
@@ -33,11 +33,6 @@ Well, now you can try everything you set your mind to. Find out what grades you 
 ---
 
 ###To-Do List and Upcoming Updates:
-
-####v0.0.3a pre-ng
--Clean the code from the main index.html file.<br/>
--Add comments and a list of what everything does.<br/>
--Add a list of dependencies and clean up everything.
 
 ####v0.0.4 pre-ng
 -Add wanted grades, averages and overall averages.<br/>

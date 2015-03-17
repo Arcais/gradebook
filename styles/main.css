@@ -4,8 +4,6 @@
 	width: 100%;
 }
 .subjectcontainer{
-	position:absolute;
-	top:300px;
 	border:1px solid black;
 	border-radius:6px;
 	width:225px;
@@ -70,7 +68,7 @@
 	line-height: 2;
 }
 .topbox{
-	position:absolute;
+	position:fixed;
 	top:20px;
 	height:100px;
 	width:100px;
@@ -137,24 +135,8 @@
 	bottom:0px;
 	left:10px;
 }
-.stickiedinfo{
-	position:absolute;
-	left:0px;
-	top:0px;
-}
 
-
-.helpcontainer{
-	opacity:    0.7;
-  display: none; 
-	background: #000; 
-	width:      100%;
-	height:     100%; 
-	z-index:    10;
-	top:        0; 
-	left:       0; 
-	position:   fixed; 
-}
-.slidecontainer{
-	color:white;
+.column {
+	float: left;
+	width: 25%;
 }

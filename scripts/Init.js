@@ -21,15 +21,3 @@ $( ".lastadded" ).find( ".wov" ).val( "-" );
 $( ".lastadded" ).removeClass( "lastadded" );
 ovrefresh();
 
-// *** DOM Handling ***
-$(document).ready(function(){
-    $(".infobtn").sticky({className:"stickiedinfo"});
-    $(".deletegradebtn").sticky({topSpacing:10});
-    $('.row').pinterest_grid({
-		no_columns: 4,
-		padding_x: 24,
-		padding_y: 10,
-		single_column_breakpoint: 700,
-		});
-
-});
