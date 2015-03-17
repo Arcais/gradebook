@@ -135,8 +135,72 @@
 	bottom:0px;
 	left:10px;
 }
-
+.helpcontainer{
+  	display: 	none;
+	background: rgba(0,0,0,0.8); 
+	width:      100%;
+	height:     100%; 
+	z-index:    3;
+	top:        0; 
+	left:       0; 
+	position:   fixed; 
+}
+.display{
+	display: block;
+}
+.closehelp{
+	cursor:pointer;
+	position:absolute;
+	width:100px;
+	height:100px;
+	right:0px;
+	color:red;
+}
+.slidecontainer{
+	position:absolute;
+	top:100px;
+}
 .column {
 	float: left;
 	width: 25%;
+}
+.item{
+	margin-left: auto;
+	margin-right: auto;
+	width:80%;
+	background-color:#ececec;
+	border:2px #aaa;
+	border-radius:8px;
+	color:black;
+}
+.itemcontent{
+	padding:20px;
+	padding-left:50px;
+	padding-right:50px;
+}
+.itemdesc{
+	font-size:26px;
+	padding:15px;
+	text-align:center;
+}
+.tutorial{
+	padding:10px;
+}
+.wide{
+	padding:10%;
+}
+.icon{
+	height:36px;
+	width:36px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	cursor: pointer;
+}
+.icon:hover{
+	opacity:0.75;
+}
+
+h1.itemtitle{
+	 margin-top: 10px;
+	 margin-bottom:15px;
 }

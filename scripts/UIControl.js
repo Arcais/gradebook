@@ -32,3 +32,13 @@ $(document).ready(function() {
 	});
 	 
 });
+
+// *** Open Help Menu ***
+$(document).on('click', '.infobtn', function() {
+		$( ".helpcontainer" ).toggleClass("display");
+});
+
+// *** Close Help Menu ***
+$(document).on('click', '.closehelp', function() {
+		$( ".helpcontainer" ).toggleClass("display");
+});

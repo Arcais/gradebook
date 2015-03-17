@@ -1,6 +1,6 @@
 {
   "name": "Gradebook",
-  "version": "0.0.3b pre-ng",
+  "version": "0.0.3c pre-ng",
   "devDependencies": {
     "bootstrap": "^3.2.0",
     "jquery": "^1.11.1"

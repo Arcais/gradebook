@@ -4,7 +4,7 @@
 
 ---
 
-#####Current Version: v0.0.3b pre-ng
+#####Current Version: v0.0.3c pre-ng
 #####Avaliable only in Romanian Grading System currently. Big updates coming soon!
 
 ---
