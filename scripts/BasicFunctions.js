@@ -36,7 +36,12 @@ function ovrefresh(){
 	};
 	ov=sum/num;
 	mainOverallGrade=Math.floor(ov * 100) / 100;
-	$(".overallgrade").html(mainOverallGrade);
+	if(mainOverallGrade>=1&&mainOverallGrade<=10){
+		$(".overallgrade").html(mainOverallGrade);
+	}
+	else{
+		$(".overallgrade").html("-");		
+	}
 }
 
 // *** Refresh a subject overall ***
@@ -63,4 +68,68 @@ function refresh(x){
 		$(".list").find("[data-subject-id='" + x + "']").find(".aov").html("-");
 	}
 	ovrefresh();
+}
+
+function refreshSubjectPosition(){
+	for(k=0;k<=(subjects.length-1);k++){
+		if((k+1)%4){
+			$(".list").children(".column"+(k+1)%4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));		
+		}
+		else{
+			$(".list").children(".column"+4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));				
+		}
+	}
+	if((subjects.length+1)%4){
+		$(".list").children(".column"+(subjects.length+1)%4).append($(".addingbox"));
+	}
+	else{
+		$(".list").children(".column"+4).append($(".addingbox"));		
+	}
+}
+
+function saveGrades(){
+	setCookie("savedsubjects",JSON.stringify(subjects));
+}
+
+function loadGrades(){
+	for(var k=0;k<subjects.length;k++){
+		$( ".list" ).find("[data-subject-id='" + k + "']").remove();
+	}
+	
+	subjects=[];
+
+	subjects=JSON.parse(getCookie("savedsubjects"));
+		
+	for(var k=0;k<subjects.length;k++){
+
+		if((k+1)%4){
+			$(".list").children(".column"+(k+1)%4).append(premadesubject);		
+		}
+		else{
+			$(".list").children(".column"+4).append(premadesubject);				
+		}
+
+		for(var l=0;l<subjects[k].grades.length;l++){
+			$( ".lastadded" ).find(".addgr").parent().before( grade );
+			$( ".glastadded" ).find( ".gr" ).val( subjects[k].grades[l] );
+			$( ".glastadded" ).attr({"data-gr-id":l})
+			$( ".glastadded" ).removeClass( "glastadded" );				
+		}
+
+		$( ".lastadded" ).attr({"data-subject-id":k});
+		if(subjects[k].fgrade<=10&&subjects[k].fgrade>=1){
+			$( ".lastadded" ).find(".addfgr").parent().before( fgrade );
+			$( ".glastadded" ).find( ".fgr" ).val( subjects[k].fgrade );
+			$( ".glastadded" ).removeClass( "glastadded" );
+		}
+
+		refresh(k);
+
+		$( ".lastadded" ).find( ".wov" ).val( "-" );
+		$( ".lastadded" ).removeClass( "lastadded" );
+		
+	}
+
+	ovrefresh();
+	refreshSubjectPosition();
 }

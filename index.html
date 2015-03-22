@@ -28,8 +28,9 @@
   <body>
 
 	<div class="info topbox"><i class="fa fa-question topbutton infobtn"></i></div>
-
+	<div class="topbox loadbox"><i class="fa fa-download topbutton loadsubjects"></i></div>
 	<div class="deletegrade topbox"><i class="fa fa-trash-o topbutton deletegradebtn"></i></div>
+	<div class="topbox savebox"><i class="fa fa-save topbutton savesubjects"></i></div>
 
 	<div class="center">
 		<div class="page-header">
@@ -164,6 +165,26 @@
 		 		<div class="itemcontent">
 
 		  			<div class="center">
+		  				<h1 class="itemtitle">Saving and Loading</h1>
+		  			</div>
+					
+						<div class="itemdesc">
+						You can <span style="font-weight:bold">save</span> your grades and courses at any time you want, by clicking<br><i class="fa fa-save" style="font-size:50px;line-height:100px;"></i><br>
+
+						You can <span style="font-weight:bold">load</span> back your grades and courses into the browser by clicking <br><i class="fa fa-download" style="font-size:50px;line-height:100px;"></i><br>
+
+						The saved grades and courses will go into a <span style="font-weight:bold">cookie</span> so the files will be stored <span style="font-weight:bold">only in this browser</span>.<br>
+						
+						<span style="color:red;">***Remember to have cookies enabled***</span>
+					</div>
+
+		  		</div>
+			</div>
+
+		 	<div class="item">
+		 		<div class="itemcontent">
+
+		  			<div class="center">
 		  				<h1 class="itemtitle">Credits</h1>
 		  			</div>
 		  			
@@ -186,12 +207,14 @@
 
 	<!-- Script List -->
 	<script src="scripts/BasicFunctions.js"></script>
+	<script src="scripts/Cookies.js"></script>
 	<script src="scripts/Init.js"></script>
 	<script src="scripts/ElementLoading.js"></script>
 	<script src="scripts/Creation.js"></script>
 	<script src="scripts/Changing.js"></script>
 	<script src="scripts/Deleting.js"></script>
 	<script src="scripts/UIControl.js"></script>
+	<script src="scripts/Saving and Loading.js"></script>
 	<!-- *********** -->
 
   </body>

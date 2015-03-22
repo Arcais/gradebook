@@ -69,18 +69,18 @@
 }
 .topbox{
 	position:fixed;
-	top:20px;
+	top:10px;
 	height:100px;
 	width:100px;
 	text-align: center;
-	font-size:70px;
+	font-size:65px;
 	line-height:100px;
 }
 .deletegrade{
-	right:20px;
+	right:10px;
 }
 .info{
-	left:20px;
+	left:10px;
 }
 .topbutton{
 	cursor: pointer;
@@ -203,4 +203,15 @@
 h1.itemtitle{
 	 margin-top: 10px;
 	 margin-bottom:15px;
+}
+.loadbox{
+	cursor:pointer;
+	left:85px;
+}
+.savebox{
+	cursor:pointer;
+	right:85px;
+}
+.page-header {
+   margin-top: 0px; 
 }

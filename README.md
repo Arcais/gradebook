@@ -4,7 +4,7 @@
 
 ---
 
-#####Current Version: v0.0.3c pre-ng
+#####Current Version: v0.0.4 pre-ng
 #####Avaliable only in Romanian Grading System currently. Big updates coming soon!
 
 ---
@@ -34,20 +34,22 @@ Well, now you can try everything you set your mind to. Find out what grades you 
 
 ###To-Do List and Upcoming Updates:
 
-####v0.0.4 pre-ng
--Add wanted grades, averages and overall averages.<br/>
--Add basic options to course boxes.
+####v0.0.4a pre-ng
+-Add some alert system to make users know that their grades have been saved.<br/>
+-Add basic options.
 
 ####v0.0.5 pre-ng
+-Add wanted grades, averages and overall averages.<br/>
+
+####v0.0.6 pre-ng
 -Build a Toolbar/Header<br/>
 -Add more buttons and functionalities.<br/>
 -Add advanced options to course boxes.
 
-####v0.0.6 pre-ng
--Make web-app responsive.<br/>
--Add save and load system.
-
 ####v0.0.7 pre-ng
+-Make web-app responsive.
+
+####v0.0.8 pre-ng
 -Clean up interface.<br/>
 -Make a better layout by adding some plugins.
 

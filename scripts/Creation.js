@@ -1,6 +1,7 @@
 // *** Function to create a new Subject Box ***
 $(document).on('click', '.addbox', function() {
 	$( this ).parent().parent().before( subject );
+	$( ".lastadded" ).find( ".aov" ).html( "10" );
 	$( ".lastadded" ).find( ".gr" ).val( "10" );
 	$( ".lastadded" ).find( ".wov" ).val( "-" );
 	subjects.push({

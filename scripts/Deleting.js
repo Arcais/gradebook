@@ -67,20 +67,3 @@ $(document).on('click', '.delsubjectbox', function() {
     	refreshSubjectPosition();
     }
 });
-
-function refreshSubjectPosition(){
-	for(k=0;k<=(subjects.length-1);k++){
-		if((k+1)%4){
-			$(".list").children(".column"+(k+1)%4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));		
-		}
-		else{
-			$(".list").children(".column"+4).append($(".subjectcontainer[data-subject-id='"+ k +"']"));				
-		}
-	}
-	if((subjects.length+1)%4){
-		$(".list").children(".column"+(subjects.length+1)%4).append($(".addingbox"));
-	}
-	else{
-		$(".list").children(".column"+4).append($(".addingbox"));		
-	}
-}
