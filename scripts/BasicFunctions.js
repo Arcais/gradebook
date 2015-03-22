@@ -120,6 +120,7 @@ function loadGrades(){
 		if(subjects[k].fgrade<=10&&subjects[k].fgrade>=1){
 			$( ".lastadded" ).find(".addfgr").parent().before( fgrade );
 			$( ".glastadded" ).find( ".fgr" ).val( subjects[k].fgrade );
+			$( ".lastadded" ).find(".addfgr").addClass( "disabled" );
 			$( ".glastadded" ).removeClass( "glastadded" );
 		}
 
