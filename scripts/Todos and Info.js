@@ -1,9 +1,7 @@
 //          TODOS
-// -Clean all this spaghetti code	| v0.0.3a
-// -Add Wanted Grade System			| v0.0.4
-// -Build Toolbar/Header			| v0.0.5
-// -Make Website Responsive			| v0.0.6
-// -Add Some Layout Elements		| v0.0.7
+// -Build Toolbar/Header			| v0.0.6
+// -Make Website Responsive			| v0.0.7
+// -Add Some Layout Elements		| v0.0.8
 //  * BIG ANGULAR UPDATE *			| v0.1.0
 
 

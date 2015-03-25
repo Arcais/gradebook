@@ -90,29 +90,3 @@ $(document).on('click', '.gradedown', function() {
 	refresh(subjectSelector);
 });
 
-// *** Input Change Verifier ***
-$('.gr').each(function() {
-	var elem = $( this );
-
-   	// Save current value of element
-   	elem.data('oldVal', elem.val());
-
-   	// Look for changes in the value
-   	elem.bind("propertychange change click keyup input paste", function(event){
-    // If value has changed...
-    if (elem.data('oldVal') != elem.val()) {
-       	// Updated stored value
-       	elem.data('oldVal', elem.val());
-
-       	subjectSelector=parseInt(elem.parent().parent().parent().attr("data-subject-id"));
-       	gradeSelector=parseInt(elem.parent().attr("data-gr-id"));
-
-       	if(parseInt(elem.val())<=10&&parseInt(elem.val())>=1){
-       		subjects[subjectSelector].grades[gradeSelector]=parseInt(elem.val());
-       		refresh(subjectSelector);
-   		}
-
-    }
-
-   });
- });

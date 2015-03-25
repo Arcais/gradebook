@@ -7,7 +7,7 @@ $(document).on('click', '.addbox', function() {
 	subjects.push({
 		name:"",
 		overallgrade:10,
-		wantedgrade:0,
+		overallwanted:0,
 		grades:[10,10],
 		wantedgrades:[],
 		fgrade:0,
@@ -22,6 +22,7 @@ $(document).on('click', '.addbox', function() {
 	$( this ).parent().parent().parent().parent().find(".column"+columnSelector).append( $( this ).parent().parent().clone() );
 	$( this ).parent().parent().remove();
 	ovrefresh();
+	inputListenerRefresh();
 });
 
 // *** Function to create grades for specific box ***
@@ -33,6 +34,7 @@ $(document).on('click', '.addgr', function() {
 	$( ".glastadded" ).find( ".gr" ).val( subjects[subjectSelector].grades[subjects[subjectSelector].grades.length-1] );
 	$( ".glastadded" ).removeClass( "glastadded" );
 	refresh(subjectSelector);
+	gradeInputListenerRefresh();
 });
 
 // *** Function to create the final grade for the specific box ***
@@ -45,5 +47,6 @@ $(document).on('click', '.addfgr', function() {
 	$( ".glastadded" ).removeClass( "glastadded" );
 	$( this ).addClass( "disabled" );
 	refresh(subjectSelector);
+	gradeInputListenerRefresh();
 });
 

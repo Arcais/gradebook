@@ -4,7 +4,7 @@
 
 ---
 
-#####Current Version: v0.0.4a pre-ng
+#####Current Version: v0.0.5 pre-ng
 #####Avaliable only in Romanian Grading System currently. Big updates coming soon!
 
 ---
@@ -34,12 +34,13 @@ Well, now you can try everything you set your mind to. Find out what grades you 
 
 ###To-Do List and Upcoming Updates:
 
-####v0.0.4b pre-ng
+###v0.0.5a pre-ng
+-Fix the VERY BUGGY wanted grade system
+-Fix some small saving issues
+
+####v0.0.5b pre-ng
 -Add some alert system to make users know that their grades have been saved.<br/>
 -Add basic options.
-
-####v0.0.5 pre-ng
--Add wanted grades, averages and overall averages.<br/>
 
 ####v0.0.6 pre-ng
 -Build a Toolbar/Header<br/>

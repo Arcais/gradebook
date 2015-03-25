@@ -7,7 +7,7 @@ var subjects = [
 	{
 		name:"",
 		overallgrade:10,
-		wantedgrade:0,
+		overallwanted:0,
 		grades:[10,10],
 		wantedgrades:[],
 		fgrade:0,
@@ -20,4 +20,4 @@ $( ".lastadded" ).find( ".gr" ).val( "10" );
 $( ".lastadded" ).find( ".wov" ).val( "-" );
 $( ".lastadded" ).removeClass( "lastadded" );
 ovrefresh();
-
+inputListenerRefresh();
