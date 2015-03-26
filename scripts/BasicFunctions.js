@@ -283,19 +283,23 @@ function deleteWantedGrades(elem, x){
 }
 
 function addWantedGrades(elem, x){
-	var newoverallgrade=((subjects[x].overallgrade*4)-subjects[x].fgrade)/3;
-	var overalltotal=subjects[x].grades.length*newoverallgrade;
+	var overalltotal=subjects[x].grades.length*subjects[x].overallgrade;
 	var wantedtotal=0;
 	var total=overalltotal+wantedtotal;
 	var totalnum=subjects[x].grades.length+subjects[x].wantedgrades.length;
 	var z=0;
+	console.log(total);
 	if(subjects[x].fgrade){
+		var newoverallgrade=((subjects[x].overallgrade*4)-subjects[x].fgrade)/3;
+		overalltotal=subjects[x].grades.length*newoverallgrade;
 		while( (((total/totalnum)*3+subjects[x].fgrade)/4) < (subjects[x].overallwanted-0.5) ){
+	console.log(2);
 			subjects[x].wantedgrades[z]=subjects[x].overallwanted;
 			wantedtotal=wantedtotal+subjects[x].wantedgrades[z];
 			total=overalltotal+wantedtotal;
 			totalnum=subjects[x].grades.length+subjects[x].wantedgrades.length;
 			while(((((total/totalnum)*3+subjects[x].fgrade)/4)<(subjects[x].overallwanted-0.5))&&(subjects[x].wantedgrades[z]<10)){
+	console.log(3);
 				subjects[x].wantedgrades[z]++;
 				wantedtotal++;
 				total=overalltotal+wantedtotal;
@@ -307,10 +311,14 @@ function addWantedGrades(elem, x){
 		}
 	}
 	else{
+	console.log(total);
+	console.log(totalnum);
 		while((total/totalnum)<(subjects[x].overallwanted-0.5)){
+	console.log(5);
 			subjects[x].wantedgrades[z]=subjects[x].overallwanted;
 			wantedtotal=wantedtotal+subjects[x].wantedgrades[z];
 			while(((total/totalnum)<(subjects[x].overallwanted-0.5))&&(subjects[x].wantedgrades[z]<10)){
+	console.log(6);
 				subjects[x].wantedgrades[z]++;
 				wantedtotal++;
 				total=overalltotal+wantedtotal;
